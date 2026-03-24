@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css?family=Exo:100,400,600');
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --grid-bg: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzVzWEi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1af7Ukz8xWp8z8AAAA//8DAJ4LoEAAlL1nAAAAAElFTkSuQmCC");
+}
+
+@keyframes bg-scrolling-reverse {
+  100% {
+    background-position: 50px 50px;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font: 400 16px/1.5 Exo, Ubuntu, 'Segoe UI', Helvetica, Arial, sans-serif;
+  background: #f6f8ff;
+  color: #111827;
+}
+
+.animated-bg {
+  position: fixed;
+  inset: 0;
+  background: var(--grid-bg) repeat 0 0;
+  animation: bg-scrolling-reverse 0.92s infinite linear;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.25;
+}
+
+.app-shell {
+  position: relative;
+  z-index: 1;
+}
+
+body[data-theme='light'] {
+  background: #f6f8ff;
+  color: #0f172a;
+}
+
+body[data-theme='light'] .animated-bg {
+  opacity: 0.22;
+  filter: saturate(0.7);
+}
+
+body[data-theme='dark'] {
+  background: #090d1a;
+  color: #f8fafc;
+}
+
+body[data-theme='dark'] .animated-bg {
+  opacity: 0.42;
+  filter: invert(1) saturate(0.35);
+}
+
+.top-menu {
+  overflow-x: auto;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: blur(6px);
+}
+
+.card-clickable {
+  cursor: pointer;
+}
+
+.hero {
+  background: color-mix(in oklab, var(--gray-2) 84%, transparent);
+}
+
+
+.hero-lottie,
+.hero-lottie-fallback {
+  width: min(180px, 40vw);
+  aspect-ratio: 1 / 1;
+  border: 1px dashed var(--gray-a8);
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.scroll-top {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 50;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 10px;
+  }
+
+  .hero h1,
+  .hero h2,
+  .hero h3,
+  .hero h4,
+  .hero h5,
+  .hero h6 {
+    font-size: 1.05rem;
+  }
+
+  .hero-lottie,
+  .hero-lottie-fallback {
+    width: 92px;
+  }
+}
