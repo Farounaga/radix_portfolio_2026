@@ -74,23 +74,16 @@ body[data-theme='dark'] .animated-bg {
   background: color-mix(in oklab, var(--gray-2) 84%, transparent);
 }
 
-.hero-image-placeholder {
-  width: min(120px, 28vw);
+
+.hero-lottie,
+.hero-lottie-fallback {
+  width: min(180px, 40vw);
   aspect-ratio: 1 / 1;
   border: 1px dashed var(--gray-a8);
   border-radius: 12px;
   display: grid;
   place-items: center;
-}
-
-.image-placeholder {
-  width: min(360px, 100%);
-  aspect-ratio: 1 / 1;
-  border: 1px dashed var(--gray-a8);
-  border-radius: 16px;
-  display: grid;
-  gap: 8px;
-  place-content: center;
+  overflow: hidden;
 }
 
 .scroll-top {
@@ -114,7 +107,8 @@ body[data-theme='dark'] .animated-bg {
     font-size: 1.05rem;
   }
 
-  .hero-image-placeholder {
-    width: 76px;
+  .hero-lottie,
+  .hero-lottie-fallback {
+    width: 92px;
   }
 }

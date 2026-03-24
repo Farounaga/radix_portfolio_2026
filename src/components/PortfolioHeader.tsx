@@ -1,5 +1,6 @@
 import { Badge, Box, Button, Card, Flex, Heading, Text } from '@radix-ui/themes';
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
+import { HeroAnimation } from './HeroAnimation';
 
 export function PortfolioHeader({
   appearance,
@@ -20,9 +21,7 @@ export function PortfolioHeader({
         </Flex>
 
         <Flex gap="3" align="center" wrap="wrap">
-          <Box className="hero-image-placeholder">
-            <Text size="1" color="gray">Photo</Text>
-          </Box>
+          <HeroAnimation />
           <Box>
             <Heading size="6">Vladimir Spirine</Heading>
             <Text color="gray">Développement • Cybersécurité • IA • Support applicatif</Text>
