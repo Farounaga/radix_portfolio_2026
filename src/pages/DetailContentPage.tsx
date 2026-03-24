@@ -99,6 +99,16 @@ export function DetailContentPage({ route, onBack }: { route: RouteKey; onBack: 
       <Card size="3">
         <Heading size="6" mb="2">{item.title}</Heading>
         <Text color="gray">{item.summary}</Text>
+        {item.key === 'realisations-e5e6' && (
+          <Flex gap="2" mt="3" wrap="wrap">
+            <Button asChild variant="soft" size="2">
+              <a href="/files/Fiche_E5_SPIRINE.xlsx" download="Fiche_E5_SPIRINE.xlsx">Télécharger Fiche E5</a>
+            </Button>
+            <Button asChild variant="soft" size="2">
+              <a href="/files/Fiche_E6_SPIRINE.docx" download="Fiche_E6_SPIRINE.docx">Télécharger Fiche E6</a>
+            </Button>
+          </Flex>
+        )}
       </Card>
 
       {hasFlow ? (

@@ -1,5 +1,5 @@
 import { CodeIcon, FileTextIcon } from '@radix-ui/react-icons';
-import { Badge, Card, Flex, Heading, Link, Separator, Strong, Text } from '@radix-ui/themes';
+import { Badge, Button, Card, Flex, Heading, Link, Separator, Strong, Text } from '@radix-ui/themes';
 
 export function RealisationsPage() {
   return (
@@ -13,10 +13,16 @@ export function RealisationsPage() {
         <Text color="gray">Dossiers officiels retraçant les compétences mobilisées en formation et en entreprise.</Text>
         <Separator my="3" size="4" />
         <Flex gap="3" wrap="wrap">
-          <Link href="/files/e5.pdf">E5 PDF</Link>
-          <Link href="/files/e5.xlsx">E5 Excel</Link>
-          <Link href="/files/e6.pdf">E6 PDF</Link>
-          <Link href="/files/e6.xlsx">E6 Excel</Link>
+          <Link href="/files/Fiche_E5_SPIRINE.xlsx" download>Voir E5 (Excel)</Link>
+          <Link href="/files/Fiche_E6_SPIRINE.docx" download>Voir E6 (Word)</Link>
+        </Flex>
+        <Flex gap="2" mt="3" wrap="wrap">
+          <Button asChild variant="soft" size="2">
+            <a href="/files/Fiche_E5_SPIRINE.xlsx" download="Fiche_E5_SPIRINE.xlsx">Télécharger Fiche E5</a>
+          </Button>
+          <Button asChild variant="soft" size="2">
+            <a href="/files/Fiche_E6_SPIRINE.docx" download="Fiche_E6_SPIRINE.docx">Télécharger Fiche E6</a>
+          </Button>
         </Flex>
       </Card>
 
