@@ -24,7 +24,7 @@ export function PortfolioHeader({
           <HeroAnimation />
           <Box>
             <Heading size="6">Vladimir Spirine</Heading>
-            <Text color="gray">Développement • Cybersécurité • IA • Support applicatif</Text>
+            <Text color="gray">Etudiant en BTS SIO SLAM • Support & developpeur chez Syadem </Text>
           </Box>
         </Flex>
       </Flex>

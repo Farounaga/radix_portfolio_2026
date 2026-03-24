@@ -1,4 +1,5 @@
 export type MainPage = 'home' | 'presentation' | 'parcours' | 'realisations' | 'veille';
+export type PageKey = MainPage;
 
 export type RouteKey =
   | MainPage
@@ -8,6 +9,7 @@ export type RouteKey =
   | 'presentation-entreprise'
   | 'parcours-etudes'
   | 'parcours-pro'
+  | 'parcours-travail'
   | 'parcours-competences'
   | 'parcours-certifications'
   | 'realisations-e5e6'

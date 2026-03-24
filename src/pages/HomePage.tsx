@@ -6,7 +6,7 @@ export function HomePage() {
       <Card size="3">
         <Heading size="6" mb="2">Bienvenue</Heading>
         <Text color="gray">
-          Utilisez les onglets du menu pour ouvrir chaque section. Ensuite cliquez sur une carte pour ouvrir une page détaillée avec placeholders (texte, tableau, image).
+          Utilisez les onglets du menu pour ouvrir chaque section.
         </Text>
       </Card>
     </Flex>

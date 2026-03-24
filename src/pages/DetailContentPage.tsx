@@ -64,7 +64,7 @@ function renderFlowNode(node: ContentFlowNode, idx: number) {
         </Tabs.List>
 
         {node.tabs.map((tab) => (
-          <Tabs.Content key={tab.label} value={tab.label} pt="3">
+          <Tabs.Content key={tab.label} value={tab.label} className="pt-3">
             <Flex direction="column" gap="2">
               {tab.paragraphs?.map((p, pIdx) => (
                 <Text key={`${tab.label}-p-${pIdx}`} color="gray">{p}</Text>
@@ -113,7 +113,7 @@ export function DetailContentPage({ route, onBack }: { route: RouteKey; onBack: 
             {hasBlocks && <Tabs.Trigger value="sections">Sections avancées</Tabs.Trigger>}
           </Tabs.List>
 
-          <Tabs.Content value="texte" pt="3">
+          <Tabs.Content value="texte" className="pt-3">
             <Card size="3">
               <Flex direction="column" gap="3">
                 {item.paragraphs.map((p) => (
@@ -123,14 +123,14 @@ export function DetailContentPage({ route, onBack }: { route: RouteKey; onBack: 
             </Card>
           </Tabs.Content>
 
-          <Tabs.Content value="tableau" pt="3">
+          <Tabs.Content value="tableau" className="pt-3">
             <Card size="3">
               <SimpleTable rows={item.table} />
             </Card>
           </Tabs.Content>
 
           {hasBlocks && (
-            <Tabs.Content value="sections" pt="3">
+            <Tabs.Content value="sections" className="pt-3">
               <Flex direction="column" gap="3">
                 {item.blocks!.map((block) => (
                   <Card size="3" key={block.heading}>
