@@ -219,3 +219,21 @@ Types disponibles:
 - `type: "tabs"`
 
 Si `flow` est présent sur une carte, la page détaillée suit cet ordre automatiquement.
+
+
+## 13) Hero en Lottie (JSON)
+
+Le hero utilise maintenant un fichier Lottie JSON:
+
+- Placez votre animation dans `public/hero-lottie.json`
+- Le composant `HeroAnimation` la charge automatiquement
+
+Fichiers liés:
+- `src/components/HeroAnimation.tsx`
+- `src/components/PortfolioHeader.tsx`
+- dépendance npm `lottie-web`
+
+
+### Lottie sans CDN
+
+Le projet utilise maintenant la dépendance npm `lottie-web` directement dans `HeroAnimation.tsx` (plus besoin de script externe dans `index.html`).

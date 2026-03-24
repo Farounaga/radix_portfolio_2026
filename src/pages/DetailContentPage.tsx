@@ -1,4 +1,3 @@
-import { ImageIcon } from '@radix-ui/react-icons';
 import { Box, Button, Card, Flex, Heading, Separator, Table, Tabs, Text } from '@radix-ui/themes';
 import { byKey } from '../data/content';
 import type { ContentFlowNode, ContentRow, RouteKey } from '../types';
@@ -105,12 +104,6 @@ export function DetailContentPage({ route, onBack }: { route: RouteKey; onBack: 
       {hasFlow ? (
         <Flex direction="column" gap="3">
           {item.flow!.map((node, idx) => renderFlowNode(node, idx))}
-          <Card size="3">
-            <Box className="image-placeholder">
-              <ImageIcon width={32} height={32} />
-              <Text>Image carrée responsive</Text>
-            </Box>
-          </Card>
         </Flex>
       ) : (
         <Tabs.Root defaultValue={hasBlocks ? 'sections' : 'texte'}>
@@ -118,7 +111,6 @@ export function DetailContentPage({ route, onBack }: { route: RouteKey; onBack: 
             <Tabs.Trigger value="texte">Texte</Tabs.Trigger>
             <Tabs.Trigger value="tableau">Tableau</Tabs.Trigger>
             {hasBlocks && <Tabs.Trigger value="sections">Sections avancées</Tabs.Trigger>}
-            <Tabs.Trigger value="image">Image placeholder</Tabs.Trigger>
           </Tabs.List>
 
           <Tabs.Content value="texte" pt="3">
@@ -162,14 +154,6 @@ export function DetailContentPage({ route, onBack }: { route: RouteKey; onBack: 
             </Tabs.Content>
           )}
 
-          <Tabs.Content value="image" pt="3">
-            <Card size="3">
-              <Box className="image-placeholder">
-                <ImageIcon width={32} height={32} />
-                <Text>Image carrée responsive</Text>
-              </Box>
-            </Card>
-          </Tabs.Content>
         </Tabs.Root>
       )}
     </Flex>
