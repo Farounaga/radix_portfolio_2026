@@ -44,8 +44,6 @@ export function App() {
     <Theme appearance={appearance} accentColor="indigo" grayColor="slate" radius="large" scaling="100%">
       <Container size="4" p="4">
         <Flex direction="column" gap="4">
-          <PortfolioHeader appearance={appearance} onToggleTheme={toggleTheme} />
-
           <Tabs.Root value={parent} onValueChange={(v) => setRoute(v as MainPage)}>
             <Tabs.List size="2" className="top-menu">
               <Tabs.Trigger value="home">Accueil</Tabs.Trigger>
@@ -55,6 +53,8 @@ export function App() {
               <Tabs.Trigger value="veille">Veille technologique</Tabs.Trigger>
             </Tabs.List>
           </Tabs.Root>
+
+          <PortfolioHeader appearance={appearance} onToggleTheme={toggleTheme} />
 
           {content}
           <Footer />
