@@ -29,7 +29,7 @@ body {
   animation: bg-scrolling-reverse 0.92s infinite linear;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.25;
+  opacity: 0.32;
 }
 
 .app-shell {
@@ -43,8 +43,8 @@ body[data-theme='light'] {
 }
 
 body[data-theme='light'] .animated-bg {
-  opacity: 0.22;
-  filter: saturate(0.7);
+  opacity: 0.3;
+  filter: saturate(0.9) contrast(1.08);
 }
 
 body[data-theme='dark'] {
@@ -53,8 +53,8 @@ body[data-theme='dark'] {
 }
 
 body[data-theme='dark'] .animated-bg {
-  opacity: 0.42;
-  filter: invert(1) saturate(0.35);
+  opacity: 0.5;
+  filter: invert(1) saturate(0.45) contrast(1.1);
 }
 
 .top-menu {
@@ -72,6 +72,22 @@ body[data-theme='dark'] .animated-bg {
 
 .hero {
   background: color-mix(in oklab, var(--gray-2) 84%, transparent);
+}
+
+.glass-card {
+  background: color-mix(in oklab, var(--gray-2) 80%, transparent);
+  border: 1px solid color-mix(in oklab, var(--gray-a6) 50%, transparent);
+  backdrop-filter: blur(4px);
+}
+
+.contact-form label {
+  display: block;
+}
+
+.footer-socials a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 
