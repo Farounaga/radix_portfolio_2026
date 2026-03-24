@@ -9,14 +9,13 @@ import {
   Grid,
   Heading,
   Link,
-  Section,
   Separator,
   Strong,
   Text,
 } from '@radix-ui/themes';
 import {
   BackpackIcon,
-  CertificateIcon,
+  GearIcon,
   FileTextIcon,
   GlobeIcon,
   PersonIcon,
@@ -193,7 +192,7 @@ export function App() {
           </Flex>
         </Card>
 
-        <Section>
+        <Box as="section">
           <Flex align="center" gap="2" mb="3">
             <PersonIcon />
             <Heading size="6">Présentation</Heading>
@@ -214,9 +213,9 @@ export function App() {
               </Card>
             ))}
           </Grid>
-        </Section>
+        </Box>
 
-        <Section>
+        <Box as="section">
           <Flex align="center" gap="2" mb="3">
             <BackpackIcon />
             <Heading size="6">Parcours & compétences</Heading>
@@ -236,15 +235,15 @@ export function App() {
             </Card>
             <Card className="section-card" size="3">
               <Flex align="center" gap="2" mb="2">
-                <CertificateIcon />
+                <GearIcon />
                 <Heading size="4">Certifications & Récompenses</Heading>
               </Flex>
               <BulletList items={certifications} />
             </Card>
           </Grid>
-        </Section>
+        </Box>
 
-        <Section>
+        <Box as="section">
           <Flex align="center" gap="2" mb="3">
             <RocketIcon />
             <Heading size="6">Réalisations</Heading>
@@ -271,9 +270,9 @@ export function App() {
               </Card>
             ))}
           </Grid>
-        </Section>
+        </Box>
 
-        <Section>
+        <Box as="section">
           <Card className="section-card" size="3">
             <Flex align="center" gap="2" mb="2">
               <Box className="icon-wrap">
@@ -308,7 +307,7 @@ export function App() {
               </Flex>
             )}
           </Card>
-        </Section>
+        </Box>
       </Flex>
     </Container>
   );
