@@ -18,20 +18,23 @@ body {
   margin: 0;
   min-height: 100vh;
   font: 400 16px/1.5 Exo, Ubuntu, 'Segoe UI', Helvetica, Arial, sans-serif;
-  position: relative;
   background: #f6f8ff;
   color: #111827;
 }
 
-body::before {
-  content: '';
+.animated-bg {
   position: fixed;
   inset: 0;
   background: var(--grid-bg) repeat 0 0;
   animation: bg-scrolling-reverse 0.92s infinite linear;
-  opacity: 0.25;
   pointer-events: none;
-  z-index: -1;
+  z-index: 0;
+  opacity: 0.25;
+}
+
+.app-shell {
+  position: relative;
+  z-index: 1;
 }
 
 body[data-theme='light'] {
@@ -39,17 +42,19 @@ body[data-theme='light'] {
   color: #0f172a;
 }
 
-body[data-theme='light']::before {
-  opacity: 0.18;
+body[data-theme='light'] .animated-bg {
+  opacity: 0.22;
+  filter: saturate(0.7);
 }
 
 body[data-theme='dark'] {
-  background: #0b1020;
+  background: #090d1a;
   color: #f8fafc;
 }
 
-body[data-theme='dark']::before {
-  opacity: 0.38;
+body[data-theme='dark'] .animated-bg {
+  opacity: 0.42;
+  filter: invert(1) saturate(0.35);
 }
 
 .top-menu {

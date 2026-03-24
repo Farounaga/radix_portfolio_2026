@@ -42,7 +42,8 @@ export function App() {
 
   return (
     <Theme appearance={appearance} accentColor="indigo" grayColor="slate" radius="large" scaling="100%">
-      <Container size="4" p="4">
+      <div className="animated-bg" aria-hidden />
+      <Container size="4" p="4" className="app-shell">
         <Flex direction="column" gap="4">
           <Tabs.Root value={parent} onValueChange={(v) => setRoute(v as MainPage)}>
             <Tabs.List size="2" className="top-menu">
@@ -54,7 +55,7 @@ export function App() {
             </Tabs.List>
           </Tabs.Root>
 
-          <PortfolioHeader appearance={appearance} onToggleTheme={toggleTheme} />
+          {parent === "home" && <PortfolioHeader appearance={appearance} onToggleTheme={toggleTheme} />}
 
           {content}
           <Footer />

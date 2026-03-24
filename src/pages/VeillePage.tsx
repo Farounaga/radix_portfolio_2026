@@ -9,7 +9,7 @@ type ParsedItem = { title: string; link: string; pubDate: string };
 function parseRss(xml: string): ParsedItem[] {
   const parser = new DOMParser();
   const doc = parser.parseFromString(xml, 'application/xml');
-  const nodes = Array.from(doc.querySelectorAll('item')).slice(0, 5);
+  const nodes = Array.from(doc.querySelectorAll('item')).slice(0, 10);
 
   return nodes.map((item) => ({
     title: item.querySelector('title')?.textContent?.trim() || 'Sans titre',
@@ -18,11 +18,24 @@ function parseRss(xml: string): ParsedItem[] {
   }));
 }
 
-async function fetchFeed(url: string): Promise<string> {
-  const proxy = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-  const res = await fetch(proxy);
-  if (!res.ok) throw new Error(String(res.status));
-  return res.text();
+async function fetchDirectRss(url: string): Promise<ParsedItem[]> {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`direct_${res.status}`);
+  const xml = await res.text();
+  return parseRss(xml);
+}
+
+async function fetchViaRss2Json(url: string): Promise<ParsedItem[]> {
+  const endpoint = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}&count=10`;
+  const res = await fetch(endpoint);
+  if (!res.ok) throw new Error(`rss2json_${res.status}`);
+  const data = await res.json();
+  if (data.status !== 'ok' || !Array.isArray(data.items)) throw new Error('rss2json_invalid');
+  return data.items.map((item: { title: string; link: string; pubDate: string }) => ({
+    title: item.title,
+    link: item.link,
+    pubDate: item.pubDate,
+  }));
 }
 
 export function VeillePage() {
@@ -37,8 +50,15 @@ export function VeillePage() {
 
       const all = await Promise.all(
         feeds.map(async (feed) => {
-          const xml = await fetchFeed(feed.url);
-          return parseRss(xml).map((item) => ({ ...item, source: feed.name }));
+          let parsed: ParsedItem[] = [];
+
+          try {
+            parsed = await fetchDirectRss(feed.url);
+          } catch {
+            parsed = await fetchViaRss2Json(feed.url);
+          }
+
+          return parsed.map((item) => ({ ...item, source: feed.name }));
         }),
       );
 
@@ -50,7 +70,7 @@ export function VeillePage() {
       if (merged.length === 0) throw new Error('empty');
       setRssItems(merged);
     } catch {
-      setError('Impossible de récupérer les flux en direct. Affichage du mode secours.');
+      setError('Le navigateur bloque le flux direct (CORS) et la source alternative est indisponible. Mode secours activé.');
       setRssItems(fallbackRss);
     } finally {
       setLoading(false);
@@ -67,14 +87,17 @@ export function VeillePage() {
     <Flex direction="column" gap="3">
       <Card size="3">
         <Heading size="5" mb="2">Veille technologique</Heading>
-        <Text color="gray">
-          Objectif: suivre les évolutions en cybersécurité et IA, détecter les risques, et identifier les bonnes pratiques applicables en entreprise.
+        <Text color="gray" mb="2">
+          Source configurée: TechRadar RSS.
+        </Text>
+        <Text color="gray" size="2">
+          Note: sans backend, certains flux peuvent être bloqués par CORS selon la politique du site source.
         </Text>
       </Card>
 
       <Card size="3">
         <Flex justify="between" align="center" wrap="wrap" gap="2">
-          <Heading size="4">Flux RSS (live)</Heading>
+          <Heading size="4">Flux RSS (navigateur uniquement)</Heading>
           <Button variant="soft" onClick={() => void loadFeeds()}>
             <ReloadIcon /> Actualiser
           </Button>
@@ -86,7 +109,7 @@ export function VeillePage() {
 
         {!loading && (
           <>
-            <Text size="2" color="gray" mb="2">{rssItems.length} articles • {sourceCount} sources</Text>
+            <Text size="2" color="gray" mb="2">{rssItems.length} articles • {sourceCount} source(s)</Text>
             <Flex direction="column" gap="2">
               {rssItems.map((item) => (
                 <Card key={`${item.title}-${item.pubDate}`} variant="surface">
