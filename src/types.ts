@@ -21,11 +21,26 @@ export type RssItem = {
   source: string;
 };
 
+export type ContentRow = { label: string; value: string };
+export type ContentTable = { title: string; rows: ContentRow[] };
+export type ContentBlock = { heading: string; paragraphs: string[]; tables?: ContentTable[] };
+
+export type FlowTextNode = { type: 'text'; heading?: string; paragraphs: string[] };
+export type FlowTableNode = { type: 'table'; heading?: string; tables: ContentTable[] };
+export type FlowTabsNode = {
+  type: 'tabs';
+  heading?: string;
+  tabs: Array<{ label: string; paragraphs?: string[]; tables?: ContentTable[] }>;
+};
+export type ContentFlowNode = FlowTextNode | FlowTableNode | FlowTabsNode;
+
 export type ContentItem = {
   key: RouteKey;
   section: MainPage;
   title: string;
   summary: string;
   paragraphs: string[];
-  table: Array<{ label: string; value: string }>;
+  table: ContentRow[];
+  blocks?: ContentBlock[];
+  flow?: ContentFlowNode[];
 };

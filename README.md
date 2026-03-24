@@ -47,7 +47,8 @@ npm run preview
 ## 5) Где что находится
 
 - `src/App.tsx` — меню, тема, выбор текущей страницы/детальной страницы.
-- `src/data/content.ts` — **главный файл контента** (карточки и детальные тексты).
+- `src/content/` — **папка для редактирования текстов карточек** (по разделам).
+- `src/data/content.ts` — агрегатор, который собирает контент из `src/content/*`.
 - `src/pages/SectionOverviewPage.tsx` — сетка карточек раздела.
 - `src/pages/DetailContentPage.tsx` — детальная страница (tabs + таблица + placeholder).
 - `src/pages/VeillePage.tsx` — страница veille technologique (RSS).
@@ -92,8 +93,8 @@ npm run preview
 | 'parcours-stage-2026'
 ```
 
-### Шаг 2. Добавьте объект в `src/data/content.ts`
-Добавьте новый элемент в `contentItems`:
+### Шаг 2. Добавьте объект в один из файлов `src/content/*.ts`
+Например, в `src/content/parcours.ts` добавьте новый объект в массив `parcoursContent`:
 
 ```ts
 {
@@ -126,7 +127,7 @@ npm run preview
 1. Добавить раздел в `MainPage` (`src/types.ts`).
 2. Добавить пункт в меню `Tabs.List` в `src/App.tsx`.
 3. Добавить ветку рендера в `content` внутри `App.tsx`.
-4. Добавить объекты с `section: 'certifications'` в `src/data/content.ts`.
+4. Добавить объекты с `section: 'certifications'` в соответствующий файл внутри `src/content/`.
 
 ---
 
@@ -142,3 +143,79 @@ npm run preview
 - `key` в `contentItems` совпадает 1-в-1
 - `section` указан корректно (`presentation|parcours|realisations`)
 
+
+
+## 10) Как добавить ещё RSS-источники
+
+Сейчас источники хранятся в `src/data/feeds.ts` в массиве `feeds`:
+
+```ts
+export const feeds = [
+  { name: 'TechRadar', url: 'https://www.techradar.com/rss' },
+];
+```
+
+Чтобы добавить новый RSS:
+
+1. Откройте `src/data/feeds.ts`.
+2. Добавьте новый объект в `feeds`:
+
+```ts
+{ name: 'The Verge', url: 'https://www.theverge.com/rss/index.xml' }
+```
+
+или
+
+```ts
+{ name: 'Wired', url: 'https://www.wired.com/feed/rss' }
+```
+
+3. Сохраните файл — `VeillePage` автоматически подхватит новую ссылку и попробует загрузить её.
+
+### Важно про CORS
+
+В браузерном режиме без backend часть RSS может блокироваться политикой CORS.
+В этом случае `VeillePage` сначала пробует прямой запрос, затем fallback через `rss2json`, и только потом показывает локальные fallback-статьи.
+
+
+## 11) Куда писать новый текст (проще всего)
+
+Пиши тексты в отдельной папке `src/content/`:
+
+- `src/content/presentation.ts`
+- `src/content/parcours.ts`
+- `src/content/realisations.ts`
+
+Внутри каждого файла один объект = одна карточка + её детальная страница.
+
+Если ты хочешь просто заменить текст, меняй только:
+- `title`
+- `summary`
+- `paragraphs`
+- `table`
+
+И всё, сайт сам подхватит изменения.
+
+
+## 12) Несколько таблиц и подзаголовков в одной карточке
+
+Теперь в карточке можно добавить `blocks` (опционально):
+
+- `heading` — подзаголовок секции
+- `paragraphs` — массив абзацев
+- `tables` — массив таблиц внутри этой секции
+
+Пример смотри в `src/content/presentation.ts` (первая карточка) и в `src/content/README.md`.
+
+
+### Nouveau: `flow` pour ordre libre des composants
+
+Vous pouvez maintenant définir un enchaînement libre:
+texte → tableaux → onglets → texte, etc.
+
+Types disponibles:
+- `type: "text"`
+- `type: "table"`
+- `type: "tabs"`
+
+Si `flow` est présent sur une carte, la page détaillée suit cet ordre automatiquement.
