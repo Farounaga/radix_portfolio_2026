@@ -12,7 +12,7 @@ export const realisationsContent: ContentItem[] = [
     ],
     table: [
       { label: 'Épreuves', value: 'E5 et E6' },
-      { label: 'Formats', value: 'PDF et Excel' },
+      { label: 'Formats', value: 'Excel et Word' },
     ],
     flow: [
       {
@@ -23,15 +23,15 @@ export const realisationsContent: ContentItem[] = [
             label: 'E5',
             paragraphs: [
               "Le dossier E5 correspond à l’épreuve de conception et développement.",
-              "Il est prévu pour être consulté en PDF ou en Excel, directement depuis le site."
+              "Le fichier est prévu en Excel et téléchargeable directement depuis le site."
             ],
             tables: [
               {
                 title: 'Dossier E5',
                 rows: [
                   { label: 'Type', value: 'Dossier professionnel' },
-                  { label: 'Consultation', value: 'PDF / Excel' },
-                  { label: 'Téléchargement', value: '/files/e5.pdf et /files/e5.xlsx' }
+                  { label: 'Consultation', value: 'Excel' },
+                  { label: 'Téléchargement', value: '/files/Fiche_E5_SPIRINE.xlsx' }
                 ]
               }
             ]
@@ -40,15 +40,15 @@ export const realisationsContent: ContentItem[] = [
             label: 'E6',
             paragraphs: [
               "Le dossier E6 correspond à l’épreuve d’analyse, de support et d’exploitation.",
-              "Comme pour E5, les documents sont accessibles au format PDF et Excel."
+              "Comme pour E5, le document est accessible en téléchargement direct."
             ],
             tables: [
               {
                 title: 'Dossier E6',
                 rows: [
                   { label: 'Type', value: "Dossier d’analyse / support" },
-                  { label: 'Consultation', value: 'PDF / Excel' },
-                  { label: 'Téléchargement', value: '/files/e6.pdf et /files/e6.xlsx' }
+                  { label: 'Consultation', value: 'Word (.docx)' },
+                  { label: 'Téléchargement', value: '/files/Fiche_E6_SPIRINE.docx' }
                 ]
               }
             ]
