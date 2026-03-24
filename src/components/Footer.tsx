@@ -14,7 +14,7 @@ export function Footer() {
           <Link href="#veille">Veille</Link>
         </Flex>
         <Flex gap="4" align="center" className="footer-socials">
-          <Link href="https://github.com/" target="_blank" rel="noreferrer" aria-label="GitHub">
+          <Link href="https://github.com/Farounaga" target="_blank" rel="noreferrer" aria-label="GitHub">
             <GitHubLogoIcon width="18" height="18" />
             <Text size="2">GitHub</Text>
           </Link>
@@ -22,7 +22,7 @@ export function Footer() {
             <EnvelopeClosedIcon width="18" height="18" />
             <Text size="2">Email</Text>
           </Link>
-          <Link href="https://www.linkedin.com/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+          <Link href="https://www.linkedin.com/in/vladimir-spirine-184069173/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
             <LinkedInLogoIcon width="18" height="18" />
             <Text size="2">LinkedIn</Text>
           </Link>
