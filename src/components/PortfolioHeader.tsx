@@ -1,5 +1,5 @@
 import { Badge, Box, Button, Card, Flex, Heading, Text } from '@radix-ui/themes';
-import { MoonIcon, RocketIcon, SunIcon } from '@radix-ui/react-icons';
+import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
 
 export function PortfolioHeader({
   appearance,
@@ -11,26 +11,22 @@ export function PortfolioHeader({
   return (
     <Card className="hero" size="3">
       <Flex direction="column" gap="3">
-        <Flex justify="between" align="start" wrap="wrap" gap="2">
+        <Flex justify="between" align="center" wrap="wrap" gap="3">
+          <Badge size="3" color="indigo">Portfolio BTS SIO SLAM</Badge>
+          <Button variant="soft" onClick={onToggleTheme}>
+            {appearance === 'light' ? <MoonIcon /> : <SunIcon />}
+            {appearance === 'light' ? 'Dark' : 'Light'}
+          </Button>
+        </Flex>
+
+        <Flex gap="3" align="center" wrap="wrap">
+          <Box className="hero-image-placeholder">
+            <Text size="1" color="gray">Photo</Text>
+          </Box>
           <Box>
-            <Badge size="3" color="indigo">
-              BTS SIO SLAM
-            </Badge>
-            <Heading mt="2" size="8">
-              Vladimir Spirine — Portfolio
-            </Heading>
+            <Heading size="6">Vladimir Spirine</Heading>
             <Text color="gray">Développement • Cybersécurité • IA • Support applicatif</Text>
           </Box>
-
-          <Flex gap="2" align="center">
-            <Button variant="soft" onClick={onToggleTheme}>
-              {appearance === 'light' ? <MoonIcon /> : <SunIcon />}
-              {appearance === 'light' ? 'Dark' : 'Light'}
-            </Button>
-            <Button variant="solid">
-              <RocketIcon /> Projets
-            </Button>
-          </Flex>
         </Flex>
       </Flex>
     </Card>

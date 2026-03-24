@@ -1,22 +1,44 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Container, Flex, Tabs, Theme } from '@radix-ui/themes';
 import { Footer } from './components/Footer';
 import { PortfolioHeader } from './components/PortfolioHeader';
 import { ScrollTopButton } from './components/ScrollTopButton';
+import { DetailContentPage } from './pages/DetailContentPage';
 import { HomePage } from './pages/HomePage';
-import { ParcoursPage } from './pages/ParcoursPage';
-import { PresentationPage } from './pages/PresentationPage';
-import { RealisationsPage } from './pages/RealisationsPage';
+import { SectionOverviewPage } from './pages/SectionOverviewPage';
 import { VeillePage } from './pages/VeillePage';
-import type { PageKey } from './types';
+import type { MainPage, RouteKey } from './types';
+
+function parentOfRoute(route: RouteKey): MainPage {
+  if (route.startsWith('presentation-')) return 'presentation';
+  if (route.startsWith('parcours-')) return 'parcours';
+  if (route.startsWith('realisations-')) return 'realisations';
+  if (route === 'veille') return 'veille';
+  return route as MainPage;
+}
 
 export function App() {
-  const [page, setPage] = useState<PageKey>('home');
+  const [route, setRoute] = useState<RouteKey>('home');
   const [appearance, setAppearance] = useState<'light' | 'dark'>('light');
+
+  const parent = parentOfRoute(route);
 
   const toggleTheme = () => {
     setAppearance((prev) => (prev === 'light' ? 'dark' : 'light'));
   };
+
+  useEffect(() => {
+    document.body.dataset.theme = appearance;
+  }, [appearance]);
+
+  const content = useMemo(() => {
+    if (route === 'home') return <HomePage />;
+    if (route === 'veille') return <VeillePage />;
+    if (route.startsWith('presentation-') || route.startsWith('parcours-') || route.startsWith('realisations-')) {
+      return <DetailContentPage route={route} onBack={() => setRoute(parent)} />;
+    }
+    return <SectionOverviewPage section={route as MainPage} onOpen={setRoute} />;
+  }, [parent, route]);
 
   return (
     <Theme appearance={appearance} accentColor="indigo" grayColor="slate" radius="large" scaling="100%">
@@ -24,7 +46,7 @@ export function App() {
         <Flex direction="column" gap="4">
           <PortfolioHeader appearance={appearance} onToggleTheme={toggleTheme} />
 
-          <Tabs.Root value={page} onValueChange={(v) => setPage(v as PageKey)}>
+          <Tabs.Root value={parent} onValueChange={(v) => setRoute(v as MainPage)}>
             <Tabs.List size="2" className="top-menu">
               <Tabs.Trigger value="home">Accueil</Tabs.Trigger>
               <Tabs.Trigger value="presentation">Présentation</Tabs.Trigger>
@@ -32,24 +54,9 @@ export function App() {
               <Tabs.Trigger value="realisations">Réalisations</Tabs.Trigger>
               <Tabs.Trigger value="veille">Veille technologique</Tabs.Trigger>
             </Tabs.List>
-
-            <Tabs.Content value="home" pt="4">
-              <HomePage onNavigate={setPage} />
-            </Tabs.Content>
-            <Tabs.Content value="presentation" pt="4">
-              <PresentationPage />
-            </Tabs.Content>
-            <Tabs.Content value="parcours" pt="4">
-              <ParcoursPage />
-            </Tabs.Content>
-            <Tabs.Content value="realisations" pt="4">
-              <RealisationsPage />
-            </Tabs.Content>
-            <Tabs.Content value="veille" pt="4">
-              <VeillePage />
-            </Tabs.Content>
           </Tabs.Root>
 
+          {content}
           <Footer />
         </Flex>
       </Container>
